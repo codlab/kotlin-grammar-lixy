@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+ext.GRADLE_EXTENDED_VERSION_USED = "b8060b5"
+
+apply from: "https://raw.githubusercontent.com/the-inkwell/gradle-tools/${ext.GRADLE_EXTENDED_VERSION_USED}/extended.gradle"
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+    versionCatalogs {
+        additionals {
+            from(files(gradle.extended.files.catalog))
+        }
+    }
+}
+
+include(":kotlin-grammar-lixy")
+includeBuild "gradle/extended/${ext.GRADLE_EXTENDED_VERSION_USED}/kt-plugins"
+

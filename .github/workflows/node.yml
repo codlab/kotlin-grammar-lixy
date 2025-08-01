@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      CC_TEST_REPORTER_ID: 426a8cba7a9651be2761a6f78bd46e622c0c4e2dd7d611e21b57154ff97ba5cc
+      CC_TEST_REPORTER_ID: __
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 14

@@ -1,0 +1,33 @@
+/* * * * * * * * * * * * * * * * *
+ * Default project info
+ * * * * * * * * * * * * * * * * */
+Properties props = new Properties()
+file("${project.projectDir}/version.properties").withReader { props.load(it) }
+
+def defaultVersion = props.getProperty("version")
+def defaultGroup = props.getProperty("group")
+
+def propSuffix = { prefix, suffixKeyName ->
+    return rootProject.properties.containsKey(suffixKeyName)
+            ? "${prefix}-${rootProject.properties[suffixKeyName]}" : prefix
+}
+
+ext {
+    javaVersion = "21"
+    prop = { name, defValue ->
+        return rootProject.properties.containsKey(name)
+                ? rootProject.properties[name] : defValue
+    }
+
+    sonarUrl = prop("sonarUrl", null)
+    sonarToken = prop("sonarToken", null)
+
+    signingKeyId = prop("signing.keyId", null)
+
+    group = prop("GROUP_ID", defaultGroup)
+    version = propSuffix(defaultVersion, "SUFFIX")
+    originalVersion = defaultVersion
+
+    projectVersionCode = 1
+    publishWithSources = true
+}
